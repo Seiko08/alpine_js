@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/app.less">
+    <script defer src="../node_modules/alpinejs/dist/cdn.min.js"></script>
+    <script defer src="js/app.js"></script>
+</head>
+<body>
+
+    <div x-data="{ users: [], firstname: '', lastname: '', currentIndex: ''}">
+        <form>
+            <input type="text" x-model="firstname" placeholder="First name">
+            <input type="text" x-model="lastname" placeholder="Last name">
+            <button type="button" x-on:click="
+            (
+                currentIndex.length === 0 ? users.push({firstname, lastname}) : 
+                (users[currentIndex].firstname =firstname,users[currentIndex].lastname =lastname)
+                );
+                firstname=lastname=currentIndex=''
+                ">Envoyer</button>
+        </form>
+
+        <img src="images/landscape.jpg">
+        <table>
+            <thead>
+                <tr>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template x-for="(user, index) in users" :key="index">
+                    <tr>
+                        <td x-text="user.firstname"></td>
+                        <td x-text="user.lastname"></td>
+                        <td>
+                            <button type="button" x-on:click="users.splice(index, 1)">Supprimer</button>
+                            <button type="button" x-on:click="firstname=user.firstname;lastname=user.lastname;currentIndex=index">Modifier</button>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </ul>
+    </div>
+
+
+    
+ 
+    
+
+</body>
+</html>
